@@ -35,6 +35,7 @@ class Result extends React.Component{
           onChange={this.ratingChanged}
           size={24}
           half={false}
+          value={this.props.isFavourited ? 1 : 0}
           color2={ '#208c54' }
         />
         <Title>

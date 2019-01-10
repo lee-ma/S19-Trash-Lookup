@@ -13,6 +13,11 @@ class App extends Component {
     };
   }
 
+  doesResultExistInFavourites = (result) => {
+
+    return this.state.favourites.find(favourite => favourite.title === result.title);
+  }
+
   clearSearchResults = () => {
     this.setState({
       searchResults: []
@@ -27,11 +32,13 @@ class App extends Component {
 
   addToFavourites = (favouritedItem) => {
     let favourites = this.state.favourites;
-    favourites.push(favouritedItem);
 
-    this.setState({
-      favourites
-    });
+    if (!this.doesResultExistInFavourites(favouritedItem)) {
+      favourites.push(favouritedItem);
+      this.setState({
+        favourites
+      });
+    }
   }
 
   removeFromFavourites = (unfavouritedItem) => {
@@ -53,7 +60,11 @@ class App extends Component {
           {
             this.state.searchResults.map((searchResult, idx) => {
               return (
-                <Result addToFavourites={this.addToFavourites} searchResult={searchResult} key={idx}/>
+                <Result 
+                addToFavourites={this.addToFavourites} 
+                searchResult={searchResult}
+                isFavourited={this.doesResultExistInFavourites(searchResult)}  
+                key={idx}/>
               )
             })
           }
@@ -66,7 +77,10 @@ class App extends Component {
               {
                 this.state.favourites.map((favourite, idx) => {
                   return (
-                    <Favourite removeFromFavourites={this.removeFromFavourites} favourite={favourite} key={idx}/>
+                    <Favourite 
+                    removeFromFavourites={this.removeFromFavourites} 
+                    favourite={favourite}
+                    key={idx}/>
                   )
                 })
               }
