@@ -40,6 +40,7 @@ class Result extends React.Component{
         <Title>
           {searchResult.title}
         </Title>
+        {/* For some reason, I can't properly render the escaped HTML from the JSON without the line below */}
         <Desc dangerouslySetInnerHTML={{__html: ReactHtmlParser(searchResult.body)}}/>
       </ResultContainer>
     )
