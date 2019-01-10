@@ -57,11 +57,12 @@ class App extends Component {
               )
             })
           }
-          {
+        </div>
+        {
             this.state.favourites.length
             ?
-            <div style={{backgroundColor: '#f6fef9'}}>
-              <h1>Favourites</h1>
+            <div style={{backgroundColor: '#f6fef9', paddingLeft: '1em'}}>
+              <h1 style={{color: '#208c54'}}>Favourites</h1>
               {
                 this.state.favourites.map((favourite, idx) => {
                   return (
@@ -73,8 +74,6 @@ class App extends Component {
             :
             <div></div>
           }
-          
-        </div>
       </div>
     );
   }

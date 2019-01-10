@@ -15,6 +15,7 @@ const Title = styled.div`
 `
 const Desc = styled.div`
   width: 50%;
+  margin-top: -1em;
 `
 
 class Result extends React.Component{
