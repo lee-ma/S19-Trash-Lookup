@@ -30,6 +30,13 @@ class Searchbar extends React.Component {
     this.state = {query: ''};
   }
 
+  doesKeywordsOrTitleOrBodyContainQuery = (response) => {
+
+    return response.keywords.includes(this.state.query) ||
+      response.title.includes(this.state.query) ||
+      response.body.includes(this.state.query);
+  }
+
   handleChange = (event) => {
     this.setState({query: event.target.value});
 
@@ -47,12 +54,8 @@ class Searchbar extends React.Component {
         let searchResults = [];
 
         responseJson.forEach((response) => {
-          let keywordsOrTitleOrBodyContainQuery 
-            = response.keywords.includes(this.state.query) ||
-              response.title.includes(this.state.query) ||
-              response.body.includes(this.state.query);
 
-          if(keywordsOrTitleOrBodyContainQuery) {
+          if(this.doesKeywordsOrTitleOrBodyContainQuery(response)) {
             searchResults.push(response);
           }
         })
