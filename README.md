@@ -1,4 +1,4 @@
-# Shopify-S19-Web-Challenge
+# Shopify S19 Web Engineer Intern Challenge
 
 Shopify Web Engineering Challenge Summer 2019.
 
