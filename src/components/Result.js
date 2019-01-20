@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactStars from 'react-stars';
+import PropTypes from 'prop-types';
 import ReactHtmlParser from 'react-html-parser';
 
 const ResultContainer = styled.div`
@@ -18,34 +19,42 @@ const Desc = styled.div`
   margin-top: -1em;
 `
 
-class Result extends React.Component{
+const Result = (props) => {
 
-  ratingChanged = (newRating) => {
+  const ratingChanged = (newRating) => {
     if(newRating) {
-      this.props.addToFavourites(this.props.searchResult);
+      props.addToFavourites(props.searchResult);
     }
   }
 
-  render() {
-    const { searchResult, isFavourited } = this.props;
-    return(
-      <ResultContainer>
-        <ReactStars
-          count={1}
-          onChange={this.ratingChanged}
-          size={24}
-          half={false}
-          value={isFavourited ? 1 : 0}
-          color2={ '#208c54' }
-        />
-        <Title>
-          {searchResult.title}
-        </Title>
-        {/* For some reason, I can't properly render the escaped HTML from the JSON without the line below */}
-        <Desc dangerouslySetInnerHTML={{__html: ReactHtmlParser(searchResult.body)}}/>
-      </ResultContainer>
-    )
-  }
+  const { searchResult, isFavourited } = props;
+  return(
+    <ResultContainer>
+      <ReactStars
+        count={1}
+        onChange={ratingChanged}
+        size={24}
+        half={false}
+        value={isFavourited ? 1 : 0}
+        color2={ '#208c54' }
+      />
+      <Title>
+        {searchResult.title}
+      </Title>
+      {/* For some reason, I can't properly render the escaped HTML from the JSON without the line below */}
+      <Desc dangerouslySetInnerHTML={{__html: ReactHtmlParser(searchResult.body)}}/>
+    </ResultContainer>
+  )
+}
+
+Result.propTypes = {
+  removeFromFavourites: PropTypes.func,
+  favourite: PropTypes.objectOf(PropTypes.string)
+}
+
+Result.defaultProps = {
+  addToFavourites: () => {},
+  favourite: {}
 }
 
 export default Result;

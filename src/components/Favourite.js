@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactStars from 'react-stars';
 import ReactHtmlParser from 'react-html-parser';
+import PropTypes from 'prop-types';
 import Result from  './Result';
 
 const ResultContainer = styled.div`
@@ -19,34 +20,42 @@ const Desc = styled.div`
   margin-top: -1em;
 `
 
-class Favourite extends Result{
+const Favourite = (props) => {
 
-  ratingChanged = (newRating) => {
+  const ratingChanged = (newRating) => {
     if(newRating) {
-      this.props.removeFromFavourites(this.props.favourite)
+      props.removeFromFavourites(props.favourite)
     }
   }
 
-  render() {
-    const { favourite } = this.props;
-    return(
-      <ResultContainer>
-        <ReactStars
-          count={1}
-          onChange={this.ratingChanged}
-          size={24}
-          half={false}
-          color1={ '#208c54' }
-          color2={'gray'}
-        />
-        <Title>
-          {favourite.title}
-        </Title>
-        {/* For some reason, I can't properly render the escaped HTML from the JSON without the line below */}
-        <Desc dangerouslySetInnerHTML={{__html: ReactHtmlParser(favourite.body)}}/>
-      </ResultContainer>
-    )
-  }
+  const { favourite } = props;
+  return(
+    <ResultContainer>
+      <ReactStars
+        count={1}
+        onChange={ratingChanged}
+        size={24}
+        half={false}
+        color1={ '#208c54' }
+        color2={'gray'}
+      />
+      <Title>
+        {favourite.title}
+      </Title>
+      {/* For some reason, I can't properly render the escaped HTML from the JSON without the line below */}
+      <Desc dangerouslySetInnerHTML={{__html: ReactHtmlParser(favourite.body)}}/>
+    </ResultContainer>
+  )
+}
+
+Favourite.propTypes = {
+  removeFromFavourites: PropTypes.func,
+  favourite: PropTypes.objectOf(PropTypes.string)
+}
+
+Favourite.defaultProps = {
+  removeFromFavourites: () => {},
+  favourite: {}
 }
 
 export default Favourite;
