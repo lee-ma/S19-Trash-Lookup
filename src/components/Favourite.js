@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactStars from 'react-stars';
 import ReactHtmlParser from 'react-html-parser';
+import Result from  './Result';
 
 const ResultContainer = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const Desc = styled.div`
   margin-top: -1em;
 `
 
-class Result extends React.Component{
+class Favourite extends Result{
 
   ratingChanged = (newRating) => {
     if(newRating) {
@@ -48,4 +49,4 @@ class Result extends React.Component{
   }
 }
 
-export default Result;
+export default Favourite;

@@ -27,7 +27,7 @@ class Result extends React.Component{
   }
 
   render() {
-    const { searchResult } = this.props;
+    const { searchResult, isFavourited } = this.props;
     return(
       <ResultContainer>
         <ReactStars
@@ -35,7 +35,7 @@ class Result extends React.Component{
           onChange={this.ratingChanged}
           size={24}
           half={false}
-          value={this.props.isFavourited ? 1 : 0}
+          value={isFavourited ? 1 : 0}
           color2={ '#208c54' }
         />
         <Title>

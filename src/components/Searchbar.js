@@ -32,9 +32,11 @@ class Searchbar extends React.Component {
 
   doesKeywordsOrTitleOrBodyContainQuery = (response) => {
 
-    return response.keywords.includes(this.state.query) ||
-      response.title.includes(this.state.query) ||
-      response.body.includes(this.state.query);
+    let { query } = this.state;
+
+    return response.keywords.includes(query) ||
+      response.title.includes(query) ||
+      response.body.includes(query);
   }
 
   handleChange = (event) => {
@@ -63,7 +65,7 @@ class Searchbar extends React.Component {
         this.props.getSearchResults(searchResults);
       })
       .catch(error => {
-        console.log(error);
+        this.props.getSearchResults(null);
       });
 
 
